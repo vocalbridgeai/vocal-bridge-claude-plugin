@@ -9,7 +9,7 @@ Manage the voice agent's system prompt.
 First ensure CLI is installed:
 
 ```bash
-which vb || pip install vocal-bridge
+pip install --upgrade vocal-bridge
 ```
 
 ## Commands

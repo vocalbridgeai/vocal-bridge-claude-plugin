@@ -9,7 +9,7 @@ Stream real-time debug events from the voice agent.
 First ensure CLI is installed:
 
 ```bash
-which vb || pip install vocal-bridge
+pip install --upgrade vocal-bridge
 ```
 
 Then run:

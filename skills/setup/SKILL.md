@@ -18,13 +18,13 @@ Try these in order:
 If the CLI is not found, install using pip:
 
 ```bash
-pip install vocal-bridge
+pip install --upgrade vocal-bridge
 ```
 
 Or if using uv:
 
 ```bash
-uv pip install vocal-bridge
+uv pip install --upgrade vocal-bridge
 ```
 
 ## Step 3: Verify installation

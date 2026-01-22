@@ -9,7 +9,7 @@ View call logs for the voice agent.
 First ensure CLI is installed:
 
 ```bash
-which vb || pip install vocal-bridge
+pip install --upgrade vocal-bridge
 ```
 
 ## List Recent Logs

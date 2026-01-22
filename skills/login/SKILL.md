@@ -17,7 +17,7 @@ which vb || command -v vb
 If not found, install it:
 
 ```bash
-pip install vocal-bridge
+pip install --upgrade vocal-bridge
 ```
 
 ## Login

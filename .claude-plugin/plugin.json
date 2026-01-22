@@ -1,7 +1,7 @@
 {
   "name": "vocal-bridge",
   "description": "Manage Vocal Bridge voice agents from Claude Code. View call logs, update prompts, stream debug events, and more.",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": {
     "name": "Vocal Bridge"
   },

@@ -9,7 +9,7 @@ Download the audio recording for a specific call session.
 First ensure CLI is installed:
 
 ```bash
-which vb || pip install vocal-bridge
+pip install --upgrade vocal-bridge
 ```
 
 ## Download Recording
