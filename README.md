@@ -43,6 +43,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:status` | Check authentication status |
 | `/vocal-bridge:agent` | Show agent information |
 | `/vocal-bridge:logs [session_id]` | View call logs or session details |
+| `/vocal-bridge:download <session_id>` | Download call recording audio |
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:debug` | Stream real-time debug events |
@@ -62,6 +63,16 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 
 # View specific call transcript
 /vocal-bridge:logs 550e8400-e29b-41d4-a716-446655440000
+```
+
+### Download Call Recordings
+
+```
+# Download recording for a session
+/vocal-bridge:download 550e8400-e29b-41d4-a716-446655440000
+
+# Download with custom filename
+/vocal-bridge:download 550e8400-e29b-41d4-a716-446655440000 -o call.ogg
 ```
 
 ### Manage Prompts

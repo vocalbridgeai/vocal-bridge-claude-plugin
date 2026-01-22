@@ -11,6 +11,7 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 | `/vocal-bridge:status` | Check authentication status |
 | `/vocal-bridge:agent` | Show agent information |
 | `/vocal-bridge:logs [session_id]` | View call logs |
+| `/vocal-bridge:download <session_id>` | Download call recording |
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:debug` | Stream debug events |
@@ -39,6 +40,9 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 
 # View specific call transcript
 /vocal-bridge:logs 550e8400-e29b-41d4-a716-446655440000
+
+# Download call recording
+/vocal-bridge:download 550e8400-e29b-41d4-a716-446655440000
 
 # Show call statistics
 /vocal-bridge:stats

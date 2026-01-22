@@ -40,5 +40,6 @@ This shows:
 - Caller phone and direction
 - Full transcript
 - Error message (if failed)
+- Recording availability (if available, use `/vocal-bridge:download <session_id>` to download)
 
 Use `--json` flag for machine-readable output.
