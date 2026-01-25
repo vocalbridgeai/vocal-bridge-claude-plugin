@@ -61,6 +61,10 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 # Update agent settings
 /vocal-bridge:config set --debug-mode true
 
+# Set session limits
+/vocal-bridge:config set --max-call-duration 15
+/vocal-bridge:config set --max-history-messages 50
+
 # Edit full config in editor
 /vocal-bridge:config edit
 

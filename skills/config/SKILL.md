@@ -76,6 +76,8 @@ Available options:
 - `--model-settings-file FILE` - JSON file with model settings
 - `--mcp-servers-file FILE` - JSON file with MCP servers array
 - `--builtin-tools-file FILE` - JSON file with built-in tools config
+- `--max-call-duration MINS` - Max call duration in minutes (5-30)
+- `--max-history-messages N` - Max messages before compaction (20-100)
 
 Examples:
 
@@ -91,6 +93,10 @@ vb config set --name "My Agent" --hold-enabled true --hangup-enabled true
 
 # Set MCP servers from file
 vb config set --mcp-servers-file mcp_servers.json
+
+# Set session limits
+vb config set --max-call-duration 15  # 15 minute max call duration
+vb config set --max-history-messages 50  # Keep 50 messages before compaction
 ```
 
 ### Edit full configuration
