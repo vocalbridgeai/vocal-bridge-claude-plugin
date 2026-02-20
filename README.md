@@ -47,6 +47,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|set\|edit\|options]` | Manage all agent settings |
+| `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
 | `/vocal-bridge:debug` | Stream real-time debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
 | `/vocal-bridge:help` | Show all commands |
@@ -107,6 +108,21 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 
 # Edit full configuration in $EDITOR
 /vocal-bridge:config edit
+```
+
+### Create New Agent (Paid Subscribers)
+
+Create and deploy a new voice agent directly from Claude Code. Requires an active paid subscription. Maximum 50 agents per account.
+
+```
+# Create a simple chatty agent
+/vocal-bridge:create --name "My Assistant" --style Chatty --prompt "You are a helpful assistant."
+
+# Create with a greeting and web-only deployment
+/vocal-bridge:create --name "Web Agent" --style Focused --prompt "You help users." --greeting "Hello!" --deploy-targets web
+
+# Create from a prompt file
+/vocal-bridge:create --name "Custom Agent" --style Chatty --prompt-file prompt.txt
 ```
 
 ### Debug Live Calls

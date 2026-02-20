@@ -10,6 +10,7 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 | `/vocal-bridge:login [api_key]` | Authenticate with API key |
 | `/vocal-bridge:status` | Check authentication status |
 | `/vocal-bridge:agent` | Show agent information |
+| `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
 | `/vocal-bridge:logs [session_id]` | View call logs |
 | `/vocal-bridge:download <session_id>` | Download call recording |
 | `/vocal-bridge:stats` | Show call statistics |
@@ -44,6 +45,9 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 
 # Download call recording
 /vocal-bridge:download 550e8400-e29b-41d4-a716-446655440000
+
+# Create a new agent (paid subscribers only)
+/vocal-bridge:create --name "My Agent" --style Chatty --prompt "You are helpful."
 
 # Show call statistics
 /vocal-bridge:stats
