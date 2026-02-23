@@ -23,14 +23,19 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 
 ## Getting Started
 
-1. **Get your API key** from your agent detail page at [vocalbridgeai.com](https://vocalbridgeai.com)
+1. **Get your API key** from your agent detail page or create an account key from the dashboard (paid subscribers)
 
 2. **Login** to connect Claude Code to your agent:
    ```
    /vocal-bridge:login vb_your_api_key_here
    ```
 
-3. **Verify connection**:
+3. **For account keys**, select an agent to work with:
+   ```
+   vb agent use
+   ```
+
+4. **Verify connection**:
    ```
    /vocal-bridge:status
    ```
