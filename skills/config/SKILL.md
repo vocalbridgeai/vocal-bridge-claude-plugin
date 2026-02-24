@@ -80,6 +80,8 @@ Available options:
 - `--model-settings-file FILE` - JSON file with model settings
 - `--mcp-servers-file FILE` - JSON file with MCP servers array
 - `--builtin-tools-file FILE` - JSON file with built-in tools config
+- `--client-actions-file FILE` - JSON file with client actions array
+- `--api-tools-file FILE` - JSON file with custom HTTP API tools array
 - `--max-call-duration MINS` - Max call duration in minutes (5-30)
 - `--max-history-messages N` - Max messages before compaction (20-100)
 
@@ -101,6 +103,12 @@ vb config set --mcp-servers-file mcp_servers.json
 # Set session limits
 vb config set --max-call-duration 15  # 15 minute max call duration
 vb config set --max-history-messages 50  # Keep 50 messages before compaction
+
+# Set client actions from file
+vb config set --client-actions-file client_actions.json
+
+# Set custom HTTP API tools from file
+vb config set --api-tools-file api_tools.json
 ```
 
 ### Edit full configuration
@@ -211,3 +219,47 @@ For custom language code:
 **Behavior field** (for `app_to_agent` actions only):
 - `respond` (default): Agent generates a reply when this event arrives
 - `notify`: Event is silently added to conversation context — agent sees it on next turn but does not reply immediately
+
+### Client Actions (client_actions.json)
+
+```json
+[
+  {"name": "show_product", "description": "Display a product card", "direction": "agent_to_app"},
+  {"name": "user_clicked_buy", "description": "User clicked buy", "direction": "app_to_agent", "behavior": "respond"},
+  {"name": "practice_result", "description": "Practice completed", "direction": "app_to_agent", "behavior": "notify"}
+]
+```
+
+### Custom HTTP API Tools (api_tools.json)
+
+```json
+[
+  {
+    "id": "1",
+    "name": "get_weather",
+    "description": "Get current weather for a city",
+    "method": "GET",
+    "url": "https://api.weather.com/v1/current",
+    "auth": {"type": "bearer", "credentials": {"token": "sk-xxx"}},
+    "parameters": [
+      {"name": "city", "type": "string", "description": "City name", "required": true, "location": "query"}
+    ],
+    "timeout": 30,
+    "max_retries": 2,
+    "enabled": true
+  }
+]
+```
+
+**API tool fields:**
+- `id` (string): Unique identifier
+- `name` (string): Tool name (letters, numbers, underscores only)
+- `description` (string): What the tool does (max 500 chars)
+- `method`: GET, POST, PUT, DELETE, or PATCH
+- `url` (string): HTTPS URL
+- `auth`: Optional — `bearer`, `basic`, `header`, `query`, or `none`
+- `parameters`: Optional — array of `{name, type, description, required, location}`
+- `timeout` (int): Seconds (1-300, default 30)
+- `max_retries` (int): Retries on failure (0-5, default 2)
+- `enabled` (bool): Whether tool is active (default true)
+- Maximum 20 tools per agent
