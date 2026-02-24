@@ -70,7 +70,7 @@ Available options:
 - `--style STYLE` - Agent style (Chatty, Focused, Gemini, Ultravox)
 - `--greeting TEXT` - Greeting message (use '' to clear)
 - `--prompt TEXT` - System prompt (use '' to clear)
-- `--deploy-targets TARGET` - Deploy targets (phone, web, both)
+- `--deploy-targets TARGET` - Deploy targets (phone, web, both). Subscribe to Pilot to deploy on phone numbers
 - `--background-enabled true|false` - Enable background AI system
 - `--hold-enabled true|false` - Enable hold capability
 - `--hangup-enabled true|false` - Enable hangup capability

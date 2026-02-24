@@ -27,7 +27,7 @@ vb agent create --name "Agent Name" --style Chatty --prompt "Your system prompt"
 ## Optional Parameters
 
 - `--greeting` - Greeting message
-- `--deploy-targets` - phone, web, or both (default: both)
+- `--deploy-targets` - phone, web, or both (default: web). Subscribe to Pilot to deploy on phone numbers
 - `--background-enabled true|false` - Enable background AI (default: true)
 - `--web-search-enabled true|false` - Enable web search (default: true)
 - `--hold-enabled true|false` - Enable hold capability (default: false)
@@ -54,8 +54,8 @@ vb agent create --name "My Assistant" --style Chatty --prompt "You are a helpful
 # Create with a greeting
 vb agent create --name "Sales Bot" --style Focused --prompt "You help customers find products." --greeting "Hi! How can I help you today?"
 
-# Create web-only agent
-vb agent create --name "Web Agent" --style Chatty --prompt "You are a support agent." --deploy-targets web
+# Create agent (web is the default)
+vb agent create --name "Web Agent" --style Chatty --prompt "You are a support agent."
 
 # Create from prompt file
 vb agent create --name "Custom Agent" --style Focused --prompt-file prompt.txt
@@ -68,5 +68,5 @@ vb agent create --name "Custom Voice" --style Focused --prompt "You are helpful.
 
 - Requires an active paid subscription
 - Maximum 50 total agents per account
-- Agent will be fully deployed with phone number (unless --deploy-targets web)
+- Agent will be deployed to web by default. Subscribe to Pilot to deploy on phone numbers
 - After creation, create an API key in the dashboard to manage the new agent via CLI
