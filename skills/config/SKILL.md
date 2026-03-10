@@ -84,6 +84,10 @@ Available options:
 - `--api-tools-file FILE` - JSON file with custom HTTP API tools array
 - `--max-call-duration MINS` - Max call duration in minutes (5-30)
 - `--max-history-messages N` - Max messages before compaction (20-100)
+- `--ai-agent-enabled true|false` - Enable AI Agent integration
+- `--ai-agent-description TEXT` - Description of the developer's AI agent
+- `--ai-agent-verbatim true|false` - Speak agent responses verbatim
+- `--ai-agent-file FILE` - JSON file with AI Agent config
 
 Examples:
 
@@ -109,6 +113,15 @@ vb config set --client-actions-file client_actions.json
 
 # Set custom HTTP API tools from file
 vb config set --api-tools-file api_tools.json
+
+# Enable AI Agent integration
+vb config set --ai-agent-enabled true --ai-agent-description "Customer support agent for order tracking"
+
+# Set AI Agent config from file
+vb config set --ai-agent-file ai_agent.json
+
+# Disable AI Agent integration
+vb config set --ai-agent-enabled false
 ```
 
 ### Edit full configuration
@@ -263,3 +276,18 @@ For custom language code:
 - `max_retries` (int): Retries on failure (0-5, default 2)
 - `enabled` (bool): Whether tool is active (default true)
 - Maximum 20 tools per agent
+
+### AI Agent Config (ai_agent.json)
+
+```json
+{
+  "enabled": true,
+  "description": "Customer support agent for Acme Corp",
+  "verbatim": false
+}
+```
+
+**Fields:**
+- `enabled` (boolean): Whether AI Agent integration is active
+- `description` (string): What the developer's agent does (max 2000 chars). Helps the voice agent know when to delegate questions.
+- `verbatim` (boolean): If true, voice agent speaks responses exactly as received; if false (default), adapts for natural voice delivery

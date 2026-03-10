@@ -111,6 +111,10 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 /vocal-bridge:config set --debug-mode true
 /vocal-bridge:config set --hold-enabled true --hangup-enabled true
 
+# AI Agent integration
+/vocal-bridge:config set --ai-agent-enabled true --ai-agent-description "Customer support agent"
+/vocal-bridge:config set --ai-agent-file ai_agent.json
+
 # Edit full configuration in $EDITOR
 /vocal-bridge:config edit
 ```
