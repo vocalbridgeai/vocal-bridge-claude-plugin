@@ -53,6 +53,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|set\|edit\|options]` | Manage all agent settings |
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
+| `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |
 | `/vocal-bridge:debug` | Stream real-time debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
 | `/vocal-bridge:help` | Show all commands |
@@ -132,6 +133,22 @@ Create and deploy a new voice agent directly from Claude Code. Requires an activ
 
 # Create from a prompt file
 /vocal-bridge:create --name "Custom Agent" --style Chatty --prompt-file prompt.txt
+```
+
+### Outbound Calling (Paid Subscribers)
+
+```
+# Enable outbound calling (requires accepting Terms of Use)
+/vocal-bridge:config set --outbound-enabled true --accept-outbound-tos
+
+# Set an outbound greeting
+/vocal-bridge:config set --outbound-greeting "Hi, this is a call from our team."
+
+# Place an outbound call
+/vocal-bridge:call +14155551234
+
+# Place a call with callee name
+/vocal-bridge:call +14155551234 --name "John Smith"
 ```
 
 ### Debug Live Calls

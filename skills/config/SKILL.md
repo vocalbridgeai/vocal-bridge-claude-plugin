@@ -88,6 +88,9 @@ Available options:
 - `--ai-agent-description TEXT` - Description of the developer's AI agent
 - `--ai-agent-verbatim true|false` - Speak agent responses verbatim
 - `--ai-agent-file FILE` - JSON file with AI Agent config
+- `--outbound-enabled true|false` - Enable outbound calling (Paid subscribers only)
+- `--outbound-greeting TEXT` - Greeting for outbound calls (use '' to clear)
+- `--accept-outbound-tos` - Accept Outbound Calling Terms of Use (required when enabling outbound)
 
 Examples:
 
@@ -122,6 +125,15 @@ vb config set --ai-agent-file ai_agent.json
 
 # Disable AI Agent integration
 vb config set --ai-agent-enabled false
+
+# Enable outbound calling (requires ToS acceptance)
+vb config set --outbound-enabled true --accept-outbound-tos
+
+# Set outbound greeting
+vb config set --outbound-greeting "Hi, this is a call from our team."
+
+# Disable outbound calling
+vb config set --outbound-enabled false
 ```
 
 ### Edit full configuration

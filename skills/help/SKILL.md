@@ -16,6 +16,7 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|set\|edit\|options]` | Manage all agent settings |
+| `/vocal-bridge:call <phone_number>` | Place an outbound call (Pilot only) |
 | `/vocal-bridge:debug` | Stream debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
 
@@ -68,6 +69,12 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 # Set session limits
 /vocal-bridge:config set --max-call-duration 15
 /vocal-bridge:config set --max-history-messages 50
+
+# Enable outbound calling
+/vocal-bridge:config set --outbound-enabled true --accept-outbound-tos
+
+# Place an outbound call
+/vocal-bridge:call +14155551234
 
 # Edit full config in editor
 /vocal-bridge:config edit
