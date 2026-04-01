@@ -59,6 +59,34 @@ For JSON output:
 vb config show --json
 ```
 
+### Export config sections
+
+Export a specific config section as JSON. Output is pipe-friendly for roundtripping:
+
+```bash
+# Available sections: model-settings, client-actions, mcp-servers, api-tools, ai-agent, builtin-tools
+vb config get model-settings
+vb config get client-actions
+vb config get ai-agent
+
+# Save to file, edit, then re-apply
+vb config get model-settings > settings.json
+# edit settings.json...
+vb config set --model-settings-file settings.json
+```
+
+### Partial updates with --merge
+
+Use `--merge` to deep-merge file contents with current settings instead of replacing. Only the fields you specify are changed:
+
+```bash
+# Update only the model, keeping voice/VAD/everything else intact
+echo '{"realtime": {"model": "gpt-realtime-1.5"}}' > update.json
+vb config set --model-settings-file update.json --merge
+```
+
+`--merge` works with dict-based configs: `--model-settings-file`, `--builtin-tools-file`, `--ai-agent-file`. Array-based configs (client-actions, mcp-servers, api-tools) are always replaced.
+
 ### Update individual settings
 
 ```bash
@@ -91,6 +119,7 @@ Available options:
 - `--outbound-enabled true|false` - Enable outbound calling (Paid subscribers only)
 - `--outbound-greeting TEXT` - Greeting for outbound calls (use '' to clear)
 - `--accept-outbound-tos` - Accept Outbound Calling Terms of Use (required when enabling outbound)
+- `--merge` - Deep-merge file contents with current config instead of replacing (for dict-based configs)
 
 Examples:
 
@@ -153,11 +182,13 @@ Determine user intent from $ARGUMENTS:
 - "options <name>" -> show options for specific setting
 - "show" or empty -> show all settings with `vb config show`
 - "show --json" or "json" -> show as JSON
+- "get <section>" or "export" -> export config section with `vb config get <section>`
 - "set" with options -> update specific settings
+- "set" with "--merge" -> deep-merge file with current settings
 - "edit" -> open full config in editor
 - Contains setting names -> first run `vb config options <setting>` to show valid values, then use `vb config set`
 
-**Best Practice**: When user wants to change a setting, ALWAYS run `vb config options <setting>` first to show them valid values before making changes.
+**Best Practice**: When user wants to change a setting, ALWAYS run `vb config options <setting>` first to show them valid values before making changes. For roundtrip edits, use `vb config get <section>` to export current values first.
 
 ## Agent Styles
 
