@@ -102,6 +102,10 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 # View settings as JSON
 /vocal-bridge:config show --json
 
+# Export a config section as JSON
+/vocal-bridge:config get model-settings
+/vocal-bridge:config get client-actions
+
 # Discover valid options for a setting (IMPORTANT: do this before changing settings)
 /vocal-bridge:config options voice          # by setting name
 /vocal-bridge:config options "TTS Model"    # by label (same as UI)
@@ -111,6 +115,9 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 /vocal-bridge:config set --style Focused
 /vocal-bridge:config set --debug-mode true
 /vocal-bridge:config set --hold-enabled true --hangup-enabled true
+
+# Partial update: merge file with current settings (only changes specified fields)
+/vocal-bridge:config set --model-settings-file update.json --merge
 
 # AI Agent integration
 /vocal-bridge:config set --ai-agent-enabled true --ai-agent-description "Customer support agent"
