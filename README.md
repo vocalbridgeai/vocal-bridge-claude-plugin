@@ -53,6 +53,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|set\|edit\|options]` | Manage all agent settings |
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
+| `/vocal-bridge:delete [agent_id]` | Delete an agent permanently |
 | `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |
 | `/vocal-bridge:debug` | Stream real-time debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
@@ -140,6 +141,19 @@ Create and deploy a new voice agent directly from Claude Code. Requires an activ
 
 # Create from a prompt file
 /vocal-bridge:create --name "Custom Agent" --style Chatty --prompt-file prompt.txt
+```
+
+### Delete Agent
+
+```
+# Delete the currently selected agent (requires typing agent name to confirm)
+/vocal-bridge:delete
+
+# Delete a specific agent by ID
+/vocal-bridge:delete 550e8400-e29b-41d4-a716-446655440000
+
+# Skip confirmation (use with caution)
+/vocal-bridge:delete --force
 ```
 
 ### Outbound Calling (Paid Subscribers)

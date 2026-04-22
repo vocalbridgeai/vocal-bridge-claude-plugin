@@ -11,6 +11,7 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 | `/vocal-bridge:status` | Check authentication status |
 | `/vocal-bridge:agent` | Show agent information |
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
+| `/vocal-bridge:delete [agent_id]` | Delete an agent permanently |
 | `/vocal-bridge:logs [session_id]` | View call logs |
 | `/vocal-bridge:download <session_id>` | Download call recording |
 | `/vocal-bridge:stats` | Show call statistics |
@@ -49,6 +50,9 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 
 # Create a new agent (paid subscribers only)
 /vocal-bridge:create --name "My Agent" --style Chatty --prompt "You are helpful."
+
+# Delete an agent (requires confirmation)
+/vocal-bridge:delete
 
 # Show call statistics
 /vocal-bridge:stats
