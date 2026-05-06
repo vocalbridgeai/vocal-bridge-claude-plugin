@@ -55,6 +55,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
 | `/vocal-bridge:delete [agent_id]` | Delete an agent permanently |
 | `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |
+| `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (Pilot only, 100/day) |
 | `/vocal-bridge:debug` | Stream real-time debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
 | `/vocal-bridge:help` | Show all commands |
@@ -171,6 +172,26 @@ Create and deploy a new voice agent directly from Claude Code. Requires an activ
 # Place a call with callee name
 /vocal-bridge:call +14155551234 --name "John Smith"
 ```
+
+### Evaluate a Call (Pilot Only)
+
+Run a multimodal evaluation of a recorded call. The full audio, the agent's prompt and configuration, the structured session log (transcript + tool calls + client actions), and the raw session report are sent to a multimodal LLM for a qualitative QA score and concrete prompt-improvement suggestions.
+
+```
+# Basic eval against the agent's own system prompt
+/vocal-bridge:eval 550e8400-e29b-41d4-a716-446655440000
+
+# With an explicit objective and scenario
+/vocal-bridge:eval <session_id> --objective "Schedule an interview" --scenario "User is busy and tries to reschedule"
+
+# Long objective/scenario from files
+/vocal-bridge:eval <session_id> --objective-file objective.txt --scenario-file scenario.txt
+
+# Raw JSON output (pipe-friendly)
+/vocal-bridge:eval <session_id> --json
+```
+
+Limits: 100 evals/day per user, 18 MB inline audio cap.
 
 ### Debug Live Calls
 
