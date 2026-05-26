@@ -95,7 +95,7 @@ vb config set [OPTIONS]
 
 Available options:
 - `--name NAME` - Agent name
-- `--style STYLE` - Agent style (Chatty, Focused, Gemini, Ultravox)
+- `--style STYLE` - Agent style (Chatty, Focused, Gemini, Ultravox, Listener)
 - `--greeting TEXT` - Greeting message (use '' to clear)
 - `--prompt TEXT` - System prompt (use '' to clear)
 - `--deploy-targets TARGET` - Deploy targets (phone, web, both). Subscribe to Pilot to deploy on phone numbers
@@ -198,6 +198,7 @@ Determine user intent from $ARGUMENTS:
 | **Focused** | Best for information-heavy conversations like interviews, data collection, or surveys. More thorough responses. |
 | **Gemini** | Powered by Google Gemini Live API. Great for natural, flowing conversations with multimodal capabilities. |
 | **Ultravox** | Powered by Ultravox Realtime API. Optimized for voice-first interactions with native audio understanding. |
+| **Listener** | Passive observer — never speaks. Joins a session, transcribes multi-speaker audio with diarization, runs your `custom_prompt` as a coaching policy, and streams `live_transcript` / `coaching_suggestion` / `speaker_map_update` actions to your app's data channel. Web-only (no phone). After creating one, run `vb docs` to see the action payload schemas. |
 
 ## JSON File Formats
 

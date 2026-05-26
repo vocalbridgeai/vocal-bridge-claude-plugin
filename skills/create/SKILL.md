@@ -21,7 +21,7 @@ vb agent create --name "Agent Name" --style Chatty --prompt "Your system prompt"
 ## Required Parameters
 
 - `--name` - Agent name
-- `--style` - Agent style: Chatty, Focused, Gemini, or Ultravox
+- `--style` - Agent style: Chatty, Focused, Gemini, Ultravox, or Listener
 - `--prompt` or `--prompt-file` - System prompt (text or file path)
 
 ## Optional Parameters
@@ -62,7 +62,17 @@ vb agent create --name "Custom Agent" --style Focused --prompt-file prompt.txt
 
 # Create with model settings
 vb agent create --name "Custom Voice" --style Focused --prompt "You are helpful." --model-settings-file settings.json
+
+# Create a Listener (passive observer — never speaks, streams transcripts and
+# coaching suggestions to your app via the data channel)
+vb agent create --name "IR Coach" --style Listener \
+  --prompt "You coach the CFO during earnings Q&A. Trigger on analyst questions. Respond with a bold recommended answer, 2-3 supporting bullets, and one italic caveat."
 ```
+
+## Style picking guide
+
+- **Chatty / Focused / Gemini / Ultravox** — bidirectional voice conversation. Agent listens, thinks, and speaks back.
+- **Listener** — passive observer. Joins a session, transcribes multi-speaker audio with diarization, runs your `custom_prompt` as a coaching policy, and pushes coaching suggestions to the client app's data channel. Never speaks. Web-only (no phone number). Use this when the user describes a "live coaching", "real-time assist", "watch-the-meeting", or "transcribe and suggest" use case.
 
 ## Notes
 
