@@ -37,6 +37,16 @@ vb agent create --name "Agent Name" --style Chatty --prompt "Your system prompt"
 - `--mcp-servers-file` - JSON file with MCP servers array
 - `--json` - Output as JSON
 
+## Listener-Mode Parameters (only meaningful when `--style Listener`)
+
+- `--coachee-description TEXT` - Names the person you're coaching. When set, the agent only generates a coaching card when *someone else* is speaking, and tailors each card as guidance for them. Example: `"the CFO during earnings Q&A"`.
+- `--coaching-debounce SECS` - Minimum seconds between coaching cards (0-60, default 12). Higher = more spaced-out suggestions.
+- `--coaching-context-turns N` - Recent turns of conversation the agent considers per coaching card (0-50, default 10).
+- `--coaching-job-timeout SECS` - Max seconds to wait for each coaching card before giving up (5-120, default 30).
+- `--coaching-gate true|false` - When `true` (default), coaching only appears when the conversation matches the trigger conditions in your prompt. When `false`, every spoken turn produces a coaching card.
+- `--speaker-map true|false` - When `true` (default), the agent identifies who's speaking and emits `speaker_map_update` events. When `false`, your app only sees raw labels like `S0`, `S1`.
+- `--speaker-map-interval SECS` - How often to re-check speaker identities (5-300, default 20).
+
 ## Based on $ARGUMENTS
 
 Parse user intent from $ARGUMENTS:
@@ -66,7 +76,9 @@ vb agent create --name "Custom Voice" --style Focused --prompt "You are helpful.
 # Create a Listener (passive observer — never speaks, streams transcripts and
 # coaching suggestions to your app via the data channel)
 vb agent create --name "IR Coach" --style Listener \
-  --prompt "You coach the CFO during earnings Q&A. Trigger on analyst questions. Respond with a bold recommended answer, 2-3 supporting bullets, and one italic caveat."
+  --prompt "You coach during earnings Q&A. Trigger on analyst questions. Respond with a bold recommended answer, 2-3 supporting bullets, and one italic caveat." \
+  --coachee-description "the company CFO during earnings Q&A" \
+  --coaching-debounce 8
 ```
 
 ## Style picking guide

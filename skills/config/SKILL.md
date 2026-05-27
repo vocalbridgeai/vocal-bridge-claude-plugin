@@ -121,6 +121,16 @@ Available options:
 - `--accept-outbound-tos` - Accept Outbound Calling Terms of Use (required when enabling outbound)
 - `--merge` - Deep-merge file contents with current config instead of replacing (for dict-based configs)
 
+### Listener-mode options (only meaningful for `--style Listener` agents)
+
+- `--coachee-description TEXT` - Names the person you're coaching. When set, the agent only generates a coaching card when *someone else* is speaking, and tailors each card as guidance for them. Example: `"the CFO during earnings Q&A"`.
+- `--coaching-debounce SECS` - Minimum seconds between coaching cards (0-60). Higher = fewer, more spaced-out suggestions.
+- `--coaching-context-turns N` - Recent turns of conversation the agent considers per coaching card (0-50).
+- `--coaching-job-timeout SECS` - Max seconds to wait for each coaching card before giving up (5-120).
+- `--coaching-gate true|false` - When On (default), coaching only appears when the conversation matches the trigger conditions in your prompt. When Off, every spoken turn produces a coaching card.
+- `--speaker-map true|false` - When On (default), the agent identifies who's speaking and emits `speaker_map_update` events. When Off, your app only sees raw labels like `S0`, `S1`.
+- `--speaker-map-interval SECS` - How often to re-check speaker identities (5-300).
+
 Examples:
 
 ```bash
@@ -163,6 +173,16 @@ vb config set --outbound-greeting "Hi, this is a call from our team."
 
 # Disable outbound calling
 vb config set --outbound-enabled false
+
+# Tune a Listener-mode agent
+vb config set --coachee-description "the candidate being interviewed" \
+              --coaching-debounce 20
+
+# Turn off the coaching gate so every spoken turn produces a card
+vb config set --coaching-gate false
+
+# Skip speaker identity inference entirely (app sees only S0/S1 labels)
+vb config set --speaker-map false
 ```
 
 ### Edit full configuration
