@@ -54,7 +54,9 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:config [show\|set\|edit\|options]` | Manage all agent settings |
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
 | `/vocal-bridge:delete [agent_id]` | Delete an agent permanently |
-| `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |
+| `/vocal-bridge:call <phone_number>` | Place an outbound call, optionally with `--var KEY=VALUE` dynamic variables (paid subscribers only) |
+| `/vocal-bridge:call-action <call_id> <action>` | Inject a configured `app_to_agent` event into a live outbound call |
+| `/vocal-bridge:session-action <session_id> <action>` | Inject into any live call session (inbound, outbound, or web) |
 | `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (Pilot only, 100/day) |
 | `/vocal-bridge:debug` | Stream real-time debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
@@ -171,7 +173,52 @@ Create and deploy a new voice agent directly from Claude Code. Requires an activ
 
 # Place a call with callee name
 /vocal-bridge:call +14155551234 --name "John Smith"
+
+# Place a call with dynamic variables (Vapi/Retell-style {{var}} substitution)
+/vocal-bridge:call +14155551234 \
+  --var customer_name=Jane \
+  --var appointment_time=3pm \
+  --var order_id=ORD-123
+# Reference them in your prompt: "You are calling {{customer_name}} to confirm
+# their {{appointment_time}} appointment for order {{order_id}}."
 ```
+
+### Mid-Call Action Injection
+
+Inject a configured `app_to_agent` `client_actions` event into a live call from your backend — useful for surfacing server-side events ("user paid", "appointment confirmed") to the agent mid-call.
+
+```
+# After placing an outbound call, capture the call_id and inject events
+/vocal-bridge:call-action <call_id> user_clicked_buy \
+  --payload '{"product_id":"ABC","quantity":2}'
+
+# For inbound calls or web sessions, key on the session_id from `vb logs`
+/vocal-bridge:session-action <session_id> appointment_confirmed
+/vocal-bridge:session-action <session_id> form_submitted --payload-file form.json
+```
+
+The action must be a configured `app_to_agent` action on the agent (see `/vocal-bridge:config set --client-actions-file actions.json`). Rate limits: 20/min per IP, 120/hr per API key.
+
+### Webhook Delivery of Agent Actions
+
+Every `agent_to_app` client action your agent fires can be POSTed to a webhook URL, signed with HMAC-SHA256. Useful for phone-only deployments where there's no web client subscribed to the data channel.
+
+```
+# Set the webhook URL (signing secret auto-generated on first save)
+/vocal-bridge:config set --client-actions-webhook-url https://your-backend.example.com/vocal-bridge/webhook
+
+# Retrieve the auto-generated signing secret
+/vocal-bridge:config show
+# Look for `client_actions_webhook_secret` in the output.
+
+# Rotate the secret (invalidates the current one)
+/vocal-bridge:config set --regenerate-client-actions-webhook-secret
+
+# Clear the webhook
+/vocal-bridge:config set --client-actions-webhook-url ''
+```
+
+Each POST includes `X-Vocal-Bridge-Signature: sha256=<hex>` and `X-Vocal-Bridge-Timestamp: <ms>` headers. Verify with `HMAC-SHA256(secret, f"{timestamp}.{raw_body}")` (Stripe convention). The webhook URL must be HTTPS and must not resolve to private/loopback addresses (SSRF guard).
 
 ### Evaluate a Call (Pilot Only)
 

@@ -17,7 +17,9 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|get\|set\|edit\|options]` | Manage all agent settings |
-| `/vocal-bridge:call <phone_number>` | Place an outbound call (Pilot only) |
+| `/vocal-bridge:call <phone_number>` | Place an outbound call, optionally with `--var KEY=VALUE` dynamic variables (Pilot only) |
+| `/vocal-bridge:call-action <call_id> <action>` | Inject a configured `app_to_agent` event into a live outbound call |
+| `/vocal-bridge:session-action <session_id> <action>` | Inject into a live call session (inbound, outbound, or web) |
 | `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (Pilot only, 100/day) |
 | `/vocal-bridge:debug` | Stream debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
@@ -87,6 +89,19 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 
 # Place an outbound call
 /vocal-bridge:call +14155551234
+
+# Place an outbound call with dynamic variables (Vapi/Retell-style {{var}} substitution)
+/vocal-bridge:call +14155551234 --var customer_name=Jane --var appointment_time=3pm
+
+# Inject a configured app_to_agent event into a live outbound call
+/vocal-bridge:call-action <call_id> user_clicked_buy --payload '{"product_id":"ABC"}'
+
+# Inject into any live session (inbound, outbound, or web)
+/vocal-bridge:session-action <session_id> appointment_confirmed
+
+# Configure agent_to_app webhook (HMAC-signed)
+/vocal-bridge:config set --client-actions-webhook-url https://your-backend.example.com/hook
+/vocal-bridge:config set --regenerate-client-actions-webhook-secret  # rotate
 
 # Evaluate a call recording (Pilot only, 100/day)
 /vocal-bridge:eval 550e8400-e29b-41d4-a716-446655440000

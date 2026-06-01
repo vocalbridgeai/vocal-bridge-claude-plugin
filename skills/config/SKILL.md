@@ -119,6 +119,9 @@ Available options:
 - `--outbound-enabled true|false` - Enable outbound calling (Paid subscribers only)
 - `--outbound-greeting TEXT` - Greeting for outbound calls (use '' to clear)
 - `--accept-outbound-tos` - Accept Outbound Calling Terms of Use (required when enabling outbound)
+- `--client-actions-webhook-url URL` - HTTPS endpoint that receives every `agent_to_app` client action as a signed POST. Extends client_actions to phone/SIP calls. A signing secret is auto-generated on first save. Use `''` to clear.
+- `--client-actions-webhook-secret SECRET` - Override the auto-generated signing secret with your own (use `''` to clear).
+- `--regenerate-client-actions-webhook-secret` - Rotate the signing secret (invalidates the current one).
 - `--merge` - Deep-merge file contents with current config instead of replacing (for dict-based configs)
 
 ### Listener-mode options (only meaningful for `--style Listener` agents)
@@ -173,6 +176,15 @@ vb config set --outbound-greeting "Hi, this is a call from our team."
 
 # Disable outbound calling
 vb config set --outbound-enabled false
+
+# Configure agent_to_app webhook (HMAC-signed delivery of client actions)
+vb config set --client-actions-webhook-url https://your-backend.example.com/vocal-bridge/webhook
+# After saving, retrieve the auto-generated signing secret:
+vb config show | grep client_actions_webhook_secret
+# Rotate the secret:
+vb config set --regenerate-client-actions-webhook-secret
+# Clear the webhook:
+vb config set --client-actions-webhook-url ''
 
 # Tune a Listener-mode agent
 vb config set --coachee-description "the candidate being interviewed" \
