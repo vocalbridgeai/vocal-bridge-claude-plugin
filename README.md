@@ -117,6 +117,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 /vocal-bridge:config set --style Focused
 /vocal-bridge:config set --debug-mode true
 /vocal-bridge:config set --hold-enabled true --hangup-enabled true
+/vocal-bridge:config set --continuous-mode true   # keep talking after silences (tutors, narrators)
 
 # Partial update: merge file with current settings (only changes specified fields)
 /vocal-bridge:config set --model-settings-file update.json --merge

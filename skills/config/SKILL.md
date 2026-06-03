@@ -112,6 +112,8 @@ Available options:
 - `--api-tools-file FILE` - JSON file with custom HTTP API tools array
 - `--max-call-duration MINS` - Max call duration in minutes (5-30)
 - `--max-history-messages N` - Max messages before compaction (20-100)
+- `--continuous-mode true|false` - Keep talking after short silences instead of waiting for the user each turn (tutors, narrators, guided experiences). User can still interrupt by speaking.
+- `--continuous-mode-delay SECS` - Seconds to wait before auto-continuing in continuous mode (1.0-8.0, default 2.0)
 - `--ai-agent-enabled true|false` - Enable AI Agent integration
 - `--ai-agent-description TEXT` - Description of the developer's AI agent
 - `--ai-agent-verbatim true|false` - Speak agent responses verbatim
@@ -149,6 +151,12 @@ vb config set --mcp-servers-file mcp_servers.json
 # Set session limits
 vb config set --max-call-duration 15  # 15 minute max call duration
 vb config set --max-history-messages 50  # Keep 50 messages before compaction
+
+# Continuous speech ("keep talking" mode) — agent continues on its own after a
+# short silence instead of waiting each turn. Great for tutors and narrators.
+vb config set --continuous-mode true
+vb config set --continuous-mode true --continuous-mode-delay 3  # wait 3s before continuing
+vb config set --continuous-mode false  # back to normal turn-based behavior
 
 # Set client actions from file
 vb config set --client-actions-file client_actions.json
@@ -251,10 +259,14 @@ For Focused style:
   },
   "session": {
     "max_call_duration_minutes": 30,
-    "max_history_messages": 100
+    "max_history_messages": 100,
+    "continuous_mode": "false",
+    "continuous_mode_delay": 2.0
   }
 }
 ```
+
+**Continuous speech** (`session.continuous_mode`): when `"true"`, the agent keeps talking on its own after a short silence (`continuous_mode_delay` seconds) instead of waiting for the user each turn — useful for tutors, narrators, and guided experiences. The user can still interrupt at any time by speaking. Available on all concierge styles (Chatty/Focused, Gemini, Ultravox). Defaults to `"false"` (normal turn-based behavior).
 
 **Language options:**
 - Preset: `en`, `multi` (auto-detect), `es`, `fr`, `de`, `pt`, `it`, `nl`, `ja`, `ko`, `zh`, `hi`, `ru`, `ar`, `pl`, `tr`, `vi`, `th`, `id`, `sv`, `da`, `fi`, `no`, `uk`, `cs`, `el`, `he`, `ro`, `hu`, `ms`, `bg`, `sk`, `hr`, `ca`, `ta`

@@ -82,6 +82,10 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 /vocal-bridge:config set --max-call-duration 15
 /vocal-bridge:config set --max-history-messages 50
 
+# Continuous speech ("keep talking" mode) for tutors, narrators, guided flows
+/vocal-bridge:config set --continuous-mode true
+/vocal-bridge:config set --continuous-mode true --continuous-mode-delay 3
+
 # Enable outbound calling
 /vocal-bridge:config set --outbound-enabled true --accept-outbound-tos
 
