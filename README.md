@@ -52,6 +52,9 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|set\|edit\|options]` | Manage all agent settings |
+| `/vocal-bridge:mcp test <query>` | Test background AI and MCP/API tools without a call |
+| `/vocal-bridge:post-processing test [transcript]` | Test post-call processing against a transcript |
+| `/vocal-bridge:connectors [list\|connect]` | List/connect native OAuth connectors |
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
 | `/vocal-bridge:delete [agent_id]` | Delete an agent permanently |
 | `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |

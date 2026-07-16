@@ -33,6 +33,8 @@ vb agent create --name "Agent Name" --style Chatty --prompt "Your system prompt"
 - `--hold-enabled true|false` - Enable hold capability (default: false)
 - `--hangup-enabled true|false` - Enable hangup capability (default: false)
 - `--debug-mode true|false` - Enable debug mode (default: false)
+- `--background-model auto|claude-haiku-4-5|claude-sonnet-4-6` - Claude model for background AI jobs (default: auto)
+- `--post-processing-model auto|gemini-3.5-flash|gemini-2.5-flash|gemini-2.5-flash-lite` - Model for post-call processing (default: auto)
 - `--model-settings-file` - JSON file with model settings
 - `--mcp-servers-file` - JSON file with MCP servers array
 - `--json` - Output as JSON
