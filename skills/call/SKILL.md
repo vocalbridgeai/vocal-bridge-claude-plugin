@@ -36,7 +36,7 @@ vb call +14155551234 --json
 ## Requirements
 
 - Agent must have outbound calling enabled (`vb config set --outbound-enabled true --accept-outbound-tos`)
-- Active Pilot subscription required
+- Active paid subscription required
 - Outbound Calling Terms of Use must be accepted
 
 ## Rate Limits

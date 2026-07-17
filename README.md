@@ -58,7 +58,7 @@ claude --plugin-dir ./vocal-bridge-claude-plugin
 | `/vocal-bridge:create` | Create and deploy a new agent (paid subscribers only) |
 | `/vocal-bridge:delete [agent_id]` | Delete an agent permanently |
 | `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |
-| `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (Pilot only, 100/day) |
+| `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (paid subscribers, 100/day) |
 | `/vocal-bridge:debug` | Stream real-time debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
 | `/vocal-bridge:help` | Show all commands |
@@ -177,7 +177,7 @@ Create and deploy a new voice agent directly from Claude Code. Requires an activ
 /vocal-bridge:call +14155551234 --name "John Smith"
 ```
 
-### Evaluate a Call (Pilot Only)
+### Evaluate a Call (Paid Subscribers)
 
 Run a multimodal evaluation of a recorded call. The full audio, the agent's prompt and configuration, the structured session log (transcript + tool calls + client actions), and the raw session report are sent to a multimodal LLM for a qualitative QA score and concrete prompt-improvement suggestions.
 

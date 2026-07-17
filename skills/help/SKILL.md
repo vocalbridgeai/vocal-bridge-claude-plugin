@@ -17,8 +17,8 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 | `/vocal-bridge:stats` | Show call statistics |
 | `/vocal-bridge:prompt [show\|set]` | Manage system prompt |
 | `/vocal-bridge:config [show\|get\|set\|edit\|options]` | Manage all agent settings |
-| `/vocal-bridge:call <phone_number>` | Place an outbound call (Pilot only) |
-| `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (Pilot only, 100/day) |
+| `/vocal-bridge:call <phone_number>` | Place an outbound call (paid subscribers only) |
+| `/vocal-bridge:eval <session_id>` | Evaluate a call recording with a multimodal LLM (paid subscribers, 100/day) |
 | `/vocal-bridge:debug` | Stream debug events |
 | `/vocal-bridge:setup` | Install CLI if needed |
 
@@ -92,7 +92,7 @@ description: Show help for Vocal Bridge Claude Code plugin commands
 # Place an outbound call
 /vocal-bridge:call +14155551234
 
-# Evaluate a call recording (Pilot only, 100/day)
+# Evaluate a call recording (paid subscribers, 100/day)
 /vocal-bridge:eval 550e8400-e29b-41d4-a716-446655440000
 /vocal-bridge:eval <session_id> --objective "Schedule an interview" --scenario "User is busy"
 

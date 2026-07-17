@@ -27,7 +27,7 @@ vb agent create --name "Agent Name" --style Chatty --prompt "Your system prompt"
 ## Optional Parameters
 
 - `--greeting` - Greeting message
-- `--deploy-targets` - phone, web, or both (default: web). Subscribe to Pilot to deploy on phone numbers
+- `--deploy-targets` - phone, web, or both (default: web). Subscribe to a paid plan to deploy on phone numbers
 - `--background-enabled true|false` - Enable background AI (default: true)
 - `--web-search-enabled true|false` - Enable web search (default: true)
 - `--hold-enabled true|false` - Enable hold capability (default: false)
@@ -92,5 +92,5 @@ vb agent create --name "IR Coach" --style Listener \
 
 - Requires an active paid subscription
 - Maximum 50 total agents per account
-- Agent will be deployed to web by default. Subscribe to Pilot to deploy on phone numbers
+- Agent will be deployed to web by default. Subscribe to a paid plan to deploy on phone numbers
 - After creation, create an API key in the dashboard to manage the new agent via CLI
