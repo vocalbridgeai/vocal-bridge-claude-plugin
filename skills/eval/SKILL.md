@@ -1,6 +1,6 @@
 ---
 name: eval
-description: Evaluate a call recording with a multimodal LLM. Sends the audio, the agent's prompt and configuration, the structured session log (transcript + tool calls + client actions), and the raw session report for a qualitative QA assessment. Pilot subscribers only, 100 evals per day.
+description: Evaluate a call recording with a multimodal LLM. Sends the audio, the agent's prompt and configuration, the structured session log (transcript + tool calls + client actions), and the raw session report for a qualitative QA assessment. Paid subscribers only, 100 evals per day.
 allowed-tools: Bash
 ---
 
@@ -80,7 +80,7 @@ Suggested prompt improvements:
 
 ## Restrictions
 
-- **Pilot subscription required** — `403` if not subscribed
+- **Paid subscription required** — `403` if not subscribed
 - **100 evals/day per user** across all your agents — `429` when exceeded
 - **18 MB inline audio cap** per recording — extremely long calls will be rejected
 - The session must already have a recording (`vb logs <session_id>` will tell you)

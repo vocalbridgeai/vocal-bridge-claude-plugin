@@ -64,10 +64,11 @@ vb config show --json
 Export a specific config section as JSON. Output is pipe-friendly for roundtripping:
 
 ```bash
-# Available sections: model-settings, client-actions, mcp-servers, api-tools, ai-agent, builtin-tools
+# Available sections: model-settings, client-actions, mcp-servers, api-tools, ai-agent, builtin-tools, connectors
 vb config get model-settings
 vb config get client-actions
 vb config get ai-agent
+vb config get connectors
 
 # Save to file, edit, then re-apply
 vb config get model-settings > settings.json
@@ -85,7 +86,7 @@ echo '{"realtime": {"model": "gpt-realtime-1.5"}}' > update.json
 vb config set --model-settings-file update.json --merge
 ```
 
-`--merge` works with dict-based configs: `--model-settings-file`, `--builtin-tools-file`, `--ai-agent-file`. Array-based configs (client-actions, mcp-servers, api-tools) are always replaced.
+`--merge` works with dict-based configs: `--model-settings-file`, `--builtin-tools-file`, `--ai-agent-file`, `--connectors-file`. Array-based configs (client-actions, mcp-servers, api-tools) are always replaced.
 
 ### Update individual settings
 
@@ -98,16 +99,19 @@ Available options:
 - `--style STYLE` - Agent style (Chatty, Focused, Gemini, Ultravox, Listener)
 - `--greeting TEXT` - Greeting message (use '' to clear)
 - `--prompt TEXT` - System prompt (use '' to clear)
-- `--deploy-targets TARGET` - Deploy targets (phone, web, both). Subscribe to Pilot to deploy on phone numbers
+- `--deploy-targets TARGET` - Deploy targets (phone, web, both). Subscribe to a paid plan to deploy on phone numbers
 - `--background-enabled true|false` - Enable background AI system
 - `--hold-enabled true|false` - Enable hold capability
 - `--hangup-enabled true|false` - Enable hangup capability
 - `--debug-mode true|false` - Enable debug event streaming
 - `--post-processing-prompt TEXT` - Post-processing prompt
 - `--post-processing-mcp-url URL` - Post-processing MCP server URL
+- `--post-processing-model auto|gemini-3.5-flash|gemini-2.5-flash|gemini-2.5-flash-lite` - Model for post-call processing
+- `--background-model auto|claude-haiku-4-5|claude-sonnet-4-6` - Claude model for background AI jobs
 - `--model-settings-file FILE` - JSON file with model settings
 - `--mcp-servers-file FILE` - JSON file with MCP servers array
 - `--builtin-tools-file FILE` - JSON file with built-in tools config
+- `--connectors-file FILE` - JSON file with native connectors config (connectors_config; --merge supported)
 - `--client-actions-file FILE` - JSON file with client actions array
 - `--api-tools-file FILE` - JSON file with custom HTTP API tools array
 - `--max-call-duration MINS` - Max call duration in minutes (5-30)
@@ -120,6 +124,7 @@ Available options:
 - `--ai-agent-file FILE` - JSON file with AI Agent config
 - `--outbound-enabled true|false` - Enable outbound calling (Paid subscribers only)
 - `--outbound-greeting TEXT` - Greeting for outbound calls (use '' to clear)
+- `--outbound-wait-for-user true|false` - For outbound calls, wait for the recipient to speak first
 - `--accept-outbound-tos` - Accept Outbound Calling Terms of Use (required when enabling outbound)
 - `--merge` - Deep-merge file contents with current config instead of replacing (for dict-based configs)
 
@@ -179,8 +184,20 @@ vb config set --outbound-enabled true --accept-outbound-tos
 # Set outbound greeting
 vb config set --outbound-greeting "Hi, this is a call from our team."
 
+# Wait for the recipient to speak first on outbound calls
+vb config set --outbound-wait-for-user true
+
 # Disable outbound calling
 vb config set --outbound-enabled false
+
+# Choose the background AI model (complex queries / MCP + API tools)
+vb config set --background-model claude-sonnet-4-6
+
+# Choose the post-call processing model
+vb config set --post-processing-model gemini-2.5-flash
+
+# Set native connectors config from file (--merge to change only specified fields)
+vb config set --connectors-file connectors.json --merge
 
 # Tune a Listener-mode agent
 vb config set --coachee-description "the candidate being interviewed" \
